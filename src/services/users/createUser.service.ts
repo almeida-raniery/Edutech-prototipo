@@ -9,18 +9,12 @@ async function createUserService(
   name: string,
   email: string,
   password: string
-): Promise<IUser> {
+) {
+ 
+  const findUser = await UserRepository.repo().findOneBy({email: email});
 
-  const userRepository = AppDataSource.getRepository(User);
-
-  const findUser = await userRepository.findOne({
-    where: {
-      email: email,
-    },
-  });
-  
   if (findUser) {
-    throw new Error("Email already exists");
+    return "Email already exists";
   }
 
   const hashedPassword = await hash(password, 12);
@@ -31,14 +25,14 @@ async function createUserService(
     email,
     password: hashedPassword,
     created_at: new Date(),
-    last_login: new Date()
+    last_login: new Date(),
   };
 
   console.log(newUser);
 
   await UserRepository.create(newUser);
 
-  await userRepository.save(newUser);
+  await UserRepository.save(newUser);
 
   return newUser;
 }

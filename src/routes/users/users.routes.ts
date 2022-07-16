@@ -1,14 +1,16 @@
 import { Router } from "express";
 import createUser from "../../controllers/users/createUser.controller";
+import deleteUser from "../../controllers/users/deleteUser.controller";
+import loginUser from "../../controllers/users/loginUser.controller";
 import showUser from "../../controllers/users/showUser.controller";
-import deleteUserService from "../../services/users/deleteUser.service";
-import updateUserService from "../../services/users/updateUser.service";
+import updateUser from "../../controllers/users/updateUser.controller";
 
 const route = Router();
 
 route.post('/workspace_name/users', createUser);
-route.get('/workspace_name/user', showUser);
-route.patch('/workspace_name/users/:id', updateUserService)
-route.delete('/workspace_name/users/:id', deleteUserService);
+route.post('/workspace_name/login', loginUser);
+route.get('/workspace_name/user/:id', showUser);
+route.patch('/workspace_name/users/:id', updateUser)
+route.delete('/workspace_name/users/:id', deleteUser);
 
 export default route;
