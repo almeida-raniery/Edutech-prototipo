@@ -21,7 +21,7 @@ async function userLoginService(object: any) {
   }
 
   const token = jwt.sign({ 
-    id: object.id,
+    id: user.id,
     email: object.email
      }
     , "SECRET_KEY", {

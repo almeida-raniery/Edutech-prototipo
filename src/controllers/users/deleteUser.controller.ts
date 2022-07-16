@@ -5,7 +5,7 @@ async function deleteUser(req: Request, res: Response) {
   try {
     const userDeleted = await deleteUserService(req.params.id);
 
-    return res.status(203).json(userDeleted);
+    return res.status(204);
   } catch (err) {
     return res.status(400);
   }
