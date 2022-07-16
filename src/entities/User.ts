@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryColumn, Unique } from "typeorm";
 import { Classroom } from "./ClassRoom";
 import { Role } from "./Role";
 
-@Entity()
+@Entity("user")
 export class User {
   @PrimaryColumn('uuid')
   readonly id: string;
@@ -13,9 +13,9 @@ export class User {
   @Column({select: false})
   password: string;
   @ManyToOne(()=>Classroom, classroom => classroom.users)
-  classroom: Classroom;
+  classroom?: Classroom;
   @ManyToOne(()=>Role, role => role.users)
-  role: Role;
+  role?: Role;
   @Column()
   created_at: Date;
   @Column()
