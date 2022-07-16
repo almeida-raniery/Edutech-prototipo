@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import updateUserService from "../../services/users/updateUser.service";
 
+
 async function updateUser(req: Request, res: Response) {
 
 

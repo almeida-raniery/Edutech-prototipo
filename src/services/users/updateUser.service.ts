@@ -1,12 +1,13 @@
-import { Request, Response } from "express";
-import { IUser } from "../../interfaces/User.interface";
+
 import UserRepository from "../../repositories/UserRepository";
 
 async function updateUserService(id: string, objectUser: any) {
-
-    objectUser.last_login = new Date();
-
-    await UserRepository.update(id, objectUser);
+    
+    //verificando se usuário existe para gerar erro
+    const user = await UserRepository.repo().findOneBy({ id: objectUser.id });
+    
+    await UserRepository.update(id, {...objectUser});
+    
 
     return "user updated";
 

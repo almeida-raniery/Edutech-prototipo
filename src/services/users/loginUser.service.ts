@@ -9,27 +9,25 @@ async function userLoginService(object: any) {
     return "user not found";
   }
 
-  console.log("Bycrypt aqui");
-  console.log(user);
-  console.log(object.password);
+  const lastLogin = {last_login: new Date()};
 
-//   As migrations estão configuradas para não permitir a leitura da senha, por isso ainda não configurei o login
-//   const passwordCompare = await bcrypt.compareSync(
-//     user.password,
-//     object.password
-//   );
+  await UserRepository.update(user.id, lastLogin);
+  
 
-//   if (!passwordCompare) {
-//     return "Email or password is incorrect";
-//   }
+  const passwordCompare = bcrypt.compareSync(object.password, user.password);
 
-  console.log("jwt aqui");
+  if (!passwordCompare) {
+    return "Email or password is incorrect";
+  }
 
-  const token = jwt.sign({ email: object.email }, "SECRET_KEY", { //utilizar gerador de chave md5
-    expiresIn: "24h"
+  const token = jwt.sign({ 
+    id: object.id,
+    email: object.email
+     }
+    , "SECRET_KEY", {
+    //utilizar gerador de chave md5
+    expiresIn: "24h",
   });
-
-  console.log(token);
 
   return token;
 }
