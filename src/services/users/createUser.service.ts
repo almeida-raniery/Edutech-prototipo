@@ -1,10 +1,8 @@
 import { hash } from "bcrypt";
-import { Classroom } from "../../entities/ClassRoom";
-import { v4 as uuidv4 } from "uuid";
 import UserRepository from "../../repositories/UserRepository";
-import { IUser, IUserRequest } from "../../interfaces/User.interface";
-import { Role } from "../../entities/Role";
-import ClassroomRepository from "../../repositories/ClassroomRepository";
+import { v4 as uuidv4 } from "uuid";
+import { User } from "../../entities/User";
+import { IUser } from "../../interfaces/User.interface";
 
 async function createUserService(
   name: string,
@@ -12,35 +10,35 @@ async function createUserService(
   password: string,
   role?: string
 ) {
-  console.log(name, email, password);
-
   const hashedPassword = await hash(password, 12);
 
-  const newUser: IUserRequest = {
+  const newUser = {
     name,
     email,
-    password: hashedPassword
-    // id: uuidv4(),
-    // created_at: new Date(),
-    // last_login: new Date(),
+    password: hashedPassword,
+    id: uuidv4(),
+    created_at: new Date(),
+    last_login: new Date(),
   };
 
   console.log(newUser);
 
-//   const findUser = await UserRepository.save(newUser);
+  let user : IUser = {
 
-  console.log("Depois do find")
+  name: name,
+  email: email,
+  password: hashedPassword,
+  id: uuidv4(),
+  created_at: new Date(),
+  last_login: new Date()
+}
+  await UserRepository.create(user);
 
-//   if (findUser) {
-//     throw new Error("Email already exists");
-//   }
+  //   if (findUser) {
+  //     throw new Error("Email already exists");
+  //   }
 
-  if (!newUser) {
-    throw new Error("sem corpo");
-  }
-  console.log(newUser);
-
-  return newUser;
+  return user;
 }
 
 export default createUserService;

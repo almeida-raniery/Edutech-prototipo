@@ -4,7 +4,6 @@ import showUser from "../../controllers/users/showUser.controller";
 import deleteUserService from "../../services/users/deleteUser.service";
 import updateUserService from "../../services/users/updateUser.service";
 
-
 const route = Router();
 
 route.post('/workspace_name/users', createUser);
