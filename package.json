@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
