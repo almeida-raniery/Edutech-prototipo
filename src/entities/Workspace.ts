@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 import { Course } from "./Course";
 import { Role } from "./Role";
+import { v4 as uuid } from "uuid";
 
 @Entity()
 export class Workspace {
@@ -14,4 +15,10 @@ export class Workspace {
   roles: Role[]
   @Column()
   created_at: Date;
+
+    constructor(){
+      if(!this.id){
+        this.id = uuid()
+      }
+    }
 }
