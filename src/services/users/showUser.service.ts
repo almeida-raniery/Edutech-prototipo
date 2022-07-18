@@ -1,5 +1,16 @@
 import { Request, Response } from "express";
+import { AppError } from "../../errors/AppError";
+import UserRepository from "../../repositories/UserRepository";
 
-function showUserService(req: Request, res: Response) {}
+async function showUserService(id: string) {
+
+    const infoUser = await UserRepository.repo().findOneBy({id: id})
+
+    if(!infoUser){
+        throw new AppError("User not found", 404);
+    }
+
+    return infoUser;
+}
 
 export default showUserService;

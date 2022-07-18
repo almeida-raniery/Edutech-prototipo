@@ -1,15 +1,17 @@
 import "reflect-metadata";
-import "express-async-errors"
+import "express-async-errors";
 import handleAppErrorMiddleware from "./middlewares/handleAppErrorMiddleware";
 import express from "express";
+import userRouter from "./routes/users/users.routes";
+import "dotenv/config";
 import coursesRoutes from "./routes/workspaces/workspace.routes";
-//import userRouter from "./routes/user.routes";
 
 const app = express();
 app.use(express.json());
 app.use(coursesRoutes)
 
-app.use(handleAppErrorMiddleware)
+app.use('', userRouter);
 
-//app.use('/users', userRouter);
+app.use(handleAppErrorMiddleware);
+
 export default app

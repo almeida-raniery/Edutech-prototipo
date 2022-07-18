@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
-function VerifyToken(req: Request, res: Response, next: NextFunction) {
-  const token = req.headers.authorization;
+function VerifyTokenId(req: Request, res: Response, next: NextFunction) {
+
+    const token = req.headers.authorization;
 
   if (!token) {
     return res.status(401).json({
@@ -19,13 +20,13 @@ function VerifyToken(req: Request, res: Response, next: NextFunction) {
       });
     }
 
-    req.user = {
-      id: decoded.id,
-      email: decoded.email,
-    };
-
+    if(req.params.id !== decoded.id){
+        return res.status(401).json({
+            message: "User Invalid token 3",
+          });
+    }
     next();
   });
 }
 
-export default VerifyToken;
+export default VerifyTokenId;
