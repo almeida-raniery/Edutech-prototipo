@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import express from "express";
-import coursesRoutes from "./routes/courses/courses.routes";
+import coursesRoutes from "./routes/workspaces/workspace.routes";
 //import userRouter from "./routes/user.routes";
 
 const app = express();

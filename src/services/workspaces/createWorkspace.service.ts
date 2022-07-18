@@ -38,18 +38,36 @@ async function createWorkspaceService({ name }: IworkspaceCreate) {
   userRepository.create(newUser);
   await userRepository.save(newUser);
 
-  const role = new Role();
-  role.name = `Administrator ${+ date}`;
-  role.permissions = 7;
-  role.created_at = new Date();
-  role.users = [];
-  role.users.push(newUser);
-  role.workspace = workspace;
+  const roleAdmin = new Role();
+  roleAdmin.name = `Administrator`;
+  roleAdmin.permissions = 7;
+  roleAdmin.created_at = new Date();
+  roleAdmin.users = [];
+  roleAdmin.users.push(newUser);
+  roleAdmin.workspace = workspace;
 
-  roleRepository.create(role);
-  await roleRepository.save(role);
+  roleRepository.create(roleAdmin);
+  await roleRepository.save(roleAdmin);
 
-  return { message: "Successfully created", user: newUser };
+  const roleTeacher = new Role();
+  roleTeacher.name = `Teacher`;
+  roleTeacher.permissions = 5;
+  roleTeacher.created_at = new Date();
+  roleTeacher.workspace = workspace;
+
+  roleRepository.create(roleTeacher);
+  await roleRepository.save(roleTeacher);
+
+  const roleStudent = new Role();
+  roleStudent.name = `Student`;
+  roleStudent.permissions = 3;
+  roleStudent.created_at = new Date();
+  roleStudent.workspace = workspace;
+
+  roleRepository.create(roleStudent);
+  await roleRepository.save(roleStudent);
+
+  return { message: "Successfully created", user: newUser,roleAdm: roleAdmin, roleS: roleStudent, roleT: roleTeacher };
 }
 
 export default createWorkspaceService;

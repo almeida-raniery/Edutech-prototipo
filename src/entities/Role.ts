@@ -17,7 +17,7 @@ export class Role {
   @Column("int")
   permissions: number;
   @OneToMany(() => User, (user) => user.role, { nullable: true })
-  users: User[];
+  users?: User[];
   @ManyToOne(() => Workspace, (workspace) => workspace.roles, {
     nullable: false,
   })
