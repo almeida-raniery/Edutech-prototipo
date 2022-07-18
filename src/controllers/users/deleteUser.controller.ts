@@ -3,7 +3,7 @@ import deleteUserService from "../../services/users/deleteUser.service";
 
 async function deleteUser(req: Request, res: Response) {
   try {
-    const userDeleted = await deleteUserService(req.params.id);
+    await deleteUserService(req.params.id);
 
     return res.status(204);
   } catch (err) {

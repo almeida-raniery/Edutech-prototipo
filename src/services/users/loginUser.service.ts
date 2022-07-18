@@ -9,10 +9,9 @@ async function userLoginService(object: any) {
     return "user not found";
   }
 
-  const lastLogin = {last_login: new Date()};
+  const lastLogin = { last_login: new Date() };
 
   await UserRepository.update(user.id, lastLogin);
-  
 
   const passwordCompare = bcrypt.compareSync(object.password, user.password);
 
@@ -20,14 +19,17 @@ async function userLoginService(object: any) {
     return "Email or password is incorrect";
   }
 
-  const token = jwt.sign({ 
-    id: user.id,
-    email: object.email
-     }
-    , "SECRET_KEY", {
-    //utilizar gerador de chave md5
-    expiresIn: "24h",
-  });
+  const token = jwt.sign(
+    {
+      id: user.id,
+      email: object.email,
+      role: object.role.id,
+    },
+    "SECRET_KEY", //utilizar gerador de chave md5
+    {
+      expiresIn: "24h",
+    }
+  );
 
   return token;
 }

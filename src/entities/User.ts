@@ -18,7 +18,7 @@ export class User {
   @Exclude()
   password: string;
   
-  @ManyToOne(()=>Classroom, classroom => classroom.users)
+  @ManyToOne(()=> Classroom, classroom => classroom.users)
   classroom?: Classroom;
   
   @ManyToOne(()=>Role, role => role.users)

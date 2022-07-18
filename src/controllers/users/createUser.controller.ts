@@ -7,7 +7,7 @@ async function createUser(req: Request, res: Response) {
     const { name, email, password } = req.body;
     const createdUser = await createUserService(name, email, password);
 
-    return res.json(instanceToPlain(createdUser)); //Não consegui retirar o campo password no retorno
+    return res.json(instanceToPlain(createdUser)); //Não consegui retirar o campo password no retorno com class-transformer
   } catch (err) {
     return res.status(400);
   }
