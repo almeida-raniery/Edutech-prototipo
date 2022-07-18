@@ -2,6 +2,7 @@ import { hash } from "bcrypt";
 import UserRepository from "../../repositories/UserRepository";
 import { v4 as uuidv4 } from "uuid";
 import { IUser } from "../../interfaces/User.interface";
+import { AppError } from "../../errors/AppError";
 
 async function createUserService(
   name: string,
@@ -12,7 +13,7 @@ async function createUserService(
   const findUser = await UserRepository.repo().findOneBy({email: email});
 
   if (findUser) {
-    throw new Error("Email already exists");
+    throw new AppError("Email already exists", 400);
   }
 
   const hashedPassword = await hash(password, 12);
@@ -29,6 +30,8 @@ async function createUserService(
   await UserRepository.create(newUser);
 
   await UserRepository.save(newUser);
+
+  const user = {... newUser};
 
   return newUser;
 }

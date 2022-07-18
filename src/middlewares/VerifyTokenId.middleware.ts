@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 function VerifyTokenId(req: Request, res: Response, next: NextFunction) {
 
     const token = req.headers.authorization;
-    console.log(req.headers.authorization)
 
   if (!token) {
     return res.status(401).json({
@@ -17,20 +16,15 @@ function VerifyTokenId(req: Request, res: Response, next: NextFunction) {
   jwt.verify(tokenSplit[1], "SECRET_KEY", (error: any, decoded: any) => {
     if (error) {
       return res.status(401).json({
-        message: "Invalid token 2",
+        message: "Invalid token",
       });
     }
 
-    console.log(req.params.id)
-    console.log(decoded)
-
     if(req.params.id !== decoded.id){
-
         return res.status(401).json({
-            message: "User Invalid token",
+            message: "User Invalid token 3",
           });
     }
-
     next();
   });
 }

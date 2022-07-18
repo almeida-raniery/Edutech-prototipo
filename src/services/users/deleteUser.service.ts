@@ -1,22 +1,17 @@
+import { AppError } from "../../errors/AppError";
 import UserRepository from "../../repositories/UserRepository";
 
 async function deleteUserService(id: string) {
 
-
-    console.log("cheguei aqui no service")
-
-    const userExists = UserRepository.repo().findOneBy({id: id});
+    const userExists = await UserRepository.repo().findOneBy({id: id});
 
     if(!userExists){
-        throw new Error("User not found");
+        throw new AppError("User not found", 404);
     }
   
-    await UserRepository.delete(id);
+   const userDeleted = await UserRepository.delete(id);
   
-
-    return "User deleted successfully"
-    
-
+    return userDeleted;
 }
 
 export default deleteUserService;

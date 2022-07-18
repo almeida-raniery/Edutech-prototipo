@@ -1,16 +1,17 @@
-
+import { AppError } from "../../errors/AppError";
 import UserRepository from "../../repositories/UserRepository";
 
 async function updateUserService(id: string, objectUser: any) {
-    
-    //verificando se usuário existe para gerar erro
-    const user = await UserRepository.repo().findOneBy({ id: objectUser.id });
-    
-    await UserRepository.update(id, {...objectUser});
-    
+  
+  const user = await UserRepository.repo().findOneBy({ id: objectUser.id });
 
-    return "user updated";
+  if (!user) {
+    throw new AppError("User not found", 401);
+  }
 
+  await UserRepository.update(id, { ...objectUser });
+
+  return "user updated";
 }
 
 export default updateUserService;
