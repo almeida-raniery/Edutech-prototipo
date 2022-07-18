@@ -9,7 +9,12 @@ class WorkspaceRepository {
 
   static async create(data: IWorkspaceRequest) {
     const repository = AppDataSource.getRepository(Workspace);
-    return await repository.create(data);
+    return repository.create(data);
+  }
+
+  static async save(data: IWorkspaceRequest) {
+    const repository = AppDataSource.getRepository(Workspace);
+    return await repository.save(data);
   }
 }
 
