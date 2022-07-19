@@ -30,7 +30,7 @@ async function userLoginService(object: any, workspace_name: string) {
       id: user.id,
       email: object.email,
       //role terá que ser pego da requisição no banco, não virá no corpo
-      // role: object.role.id,
+      role: user.role?.id
     },
     "SECRET_KEY", //utilizar gerador de chave md5
     {
