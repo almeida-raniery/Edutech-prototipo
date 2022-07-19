@@ -1,9 +1,9 @@
 import { Router } from "express";
-import VerifyTokenId from "../../middlewares/VerifyTokenId.middleware";
 import createCourse from '../../controllers/courses/createCourse.controller';
 import showCourse from '../../controllers/courses/showCourse.controller';
 import updateCourse from '../../controllers/courses/updateCourse.controller';
 import deleteCourse from '../../controllers/courses/deleteCourse.controller';
+import VerifyTokenId from "../../middlewares/authentication/VerifyTokenId.middleware";
 
 const courseRoute = Router();
 

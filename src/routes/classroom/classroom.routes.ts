@@ -1,9 +1,9 @@
 import { Router } from "express";
-import VerifyTokenId from "../../middlewares/VerifyTokenId.middleware";
 import createClassroom from '../../controllers/classrooms/createClassroom.controller';
 import showClassroom from '../../controllers/classrooms/showClassroom.controller';
 import updateClassroom from '../../controllers/classrooms/updateClassroom.controller';
 import deleteClassroom from '../../controllers/classrooms/deleteClassroom.controller';
+import VerifyTokenId from "../../middlewares/authentication/VerifyTokenId.middleware";
 
 const classroomRoute = Router();
 
