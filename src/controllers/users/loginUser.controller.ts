@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import userLoginService from "../../services/users/loginUser.service";
+import { Workspace } from '../../entities/Workspace';
 
 async function loginUser(req: Request, res: Response){
         
