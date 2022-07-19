@@ -12,7 +12,7 @@ const courseRoute = Router();
 
 courseRoute.post('/:workspace_name/courses', createCourse);
 courseRoute.get('/:workspace_name/courses', VerifyToken, verifyAdmin, showCourses);
-courseRoute.get('/:workspace_name/courses/:course_id', VerifyTokenId, showCourseById);
+courseRoute.get('/:workspace_name/courses/:course_id', VerifyToken, verifyAdmin, showCourseById);
 courseRoute.patch('/:workspace_name/courses/:course_id', VerifyTokenId, updateCourse);
 courseRoute.delete('/:workspace_name/courses/:course_id', VerifyToken, verifyAdmin, deleteCourse);
 
