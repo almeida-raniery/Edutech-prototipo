@@ -1,18 +1,18 @@
 import UserRepository from "../../repositories/UserRepository";
-import WorkspaceRepository from "../../repositories/WorkspaceRepository";
 import * as bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { AppError } from "../../errors/AppError";
-import { Workspace } from '../../entities/Workspace';
 import { LoginUser } from "../../interfaces/User.interface";
 
+
 async function userLoginService(dataLogin: LoginUser, workspace_name: string) {
+
   const loggedUser = await UserRepository.repo().findOneBy({
     email: dataLogin.email,
     role: { workspace: { name: workspace_name } },
   });
 
-  const Workspace_Name = await WorkspaceRepository.repo().findOneBy({ name: workspace_name });
+  // const Workspace_Name = await WorkspaceRepository.repo().findOneBy({ name: workspace_name });
   
   if (!loggedUser) {
     throw new AppError("Email or password is incorrect", 401);
