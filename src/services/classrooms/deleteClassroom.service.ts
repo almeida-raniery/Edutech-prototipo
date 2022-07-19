@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import { AppError } from "../../errors/AppError";
 import ClassroomRepository from "../../repositories/ClassroomRepository";
 
-async function deleteClassroomService(id: string, workspace_name:string) {
+async function deleteClassroomService(id: string) {
 
-    const classroomExists = await ClassroomRepository.repo().findOneBy({id: id, workspace:{name: workspace_name} });
+    const classroomExists = await ClassroomRepository.repo().findOneBy({id: id });
 
     if(!classroomExists){
         throw new AppError("Classroom not found", 404);
