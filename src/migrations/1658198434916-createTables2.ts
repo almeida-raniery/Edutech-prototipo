@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class createTables1657840701393 implements MigrationInterface {
-    name = 'createTables1657840701393'
+export class createTables21658198434916 implements MigrationInterface {
+    name = 'createTables21658198434916'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "user" ("id" uuid NOT NULL, "name" character varying(128) NOT NULL, "email" character varying NOT NULL, "password" character varying NOT NULL, "created_at" TIMESTAMP NOT NULL, "last_login" TIMESTAMP NOT NULL, "classroomId" uuid, "roleId" integer, CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE TABLE "role" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "permissions" integer NOT NULL, "created_at" TIMESTAMP NOT NULL, "workspaceId" uuid NOT NULL, CONSTRAINT "UQ_ae4578dcaed5adff96595e61660" UNIQUE ("name"), CONSTRAINT "PK_b36bcfe02fc8de3c57a8b2391c2" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "role" ("id" SERIAL NOT NULL, "name" character varying(128) NOT NULL, "permissions" integer NOT NULL, "created_at" TIMESTAMP NOT NULL, "workspaceId" uuid NOT NULL, CONSTRAINT "PK_b36bcfe02fc8de3c57a8b2391c2" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "workspace" ("id" uuid NOT NULL, "name" character varying NOT NULL, "created_at" TIMESTAMP NOT NULL, CONSTRAINT "UQ_406f56fc2a42ad5f541973cdbee" UNIQUE ("name"), CONSTRAINT "PK_ca86b6f9b3be5fe26d307d09b49" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "course" ("id" uuid NOT NULL, "title" character varying(128) NOT NULL, "created_at" TIMESTAMP NOT NULL, "workspaceId" uuid, CONSTRAINT "PK_bf95180dd756fd204fb01ce4916" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "classroom" ("id" uuid NOT NULL, "title" character varying NOT NULL, "created_at" TIMESTAMP NOT NULL, "courseId" uuid NOT NULL, CONSTRAINT "PK_729f896c8b7b96ddf10c341e6ff" PRIMARY KEY ("id"))`);

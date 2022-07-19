@@ -6,7 +6,7 @@ import { Workspace } from "./Workspace";
 @Entity()
 export class Course {
   @PrimaryColumn('uuid')
-  readonly id: string;
+  id: string;
   @Column("varchar", {length: 128, nullable: false})
   title: string;
   @OneToMany(() => Classroom, ClassRoom => ClassRoom.course)
