@@ -1,5 +1,6 @@
 import AppDataSource from "../../data-source";
 import { Workspace } from "../../entities/Workspace";
+import { hash } from "bcrypt";
 import {
   IWorkspace,
   IworkspaceCreate,
@@ -20,7 +21,7 @@ async function createWorkspaceService({ name }: IworkspaceCreate) {
   if (nameAlreadyExists) {
     throw new Error(`Name ${name} already exists`);
   }
-  const date = new Date();
+  const hashedPassword = await hash("password", 12);
   const workspace = new Workspace();
   workspace.name = name;
   workspace.created_at = new Date();
@@ -31,7 +32,7 @@ async function createWorkspaceService({ name }: IworkspaceCreate) {
   const newUser = new User();
   newUser.name = "Admin";
   newUser.email = "admin@example.com";
-  newUser.password = "password@example.com";
+  newUser.password = hashedPassword;
   newUser.created_at = new Date();
   newUser.last_login = new Date();
 
@@ -67,7 +68,7 @@ async function createWorkspaceService({ name }: IworkspaceCreate) {
   roleRepository.create(roleStudent);
   await roleRepository.save(roleStudent);
 
-  return { message: "Successfully created", user: newUser,roleAdm: roleAdmin, roleS: roleStudent, roleT: roleTeacher };
+  return { message: "Successfully created", user: newUser,roleAdm: roleAdmin.id, roleSudent: roleStudent.id, roleTeacher: roleTeacher.id };
 }
 
 export default createWorkspaceService;
