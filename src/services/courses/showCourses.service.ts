@@ -1,8 +1,6 @@
-import { Request, Response } from "express";
 import { AppError } from "../../errors/AppError";
 import CourseRepository from "../../repositories/CourseRepository";
 import WorkspaceRepository from "../../repositories/WorkspaceRepository";
-import { Workspace } from '../../entities/Workspace';
 
 async function showCoursesService(workspace_name:string) {
 
