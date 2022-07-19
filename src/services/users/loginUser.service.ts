@@ -4,9 +4,16 @@ import jwt from "jsonwebtoken";
 import { AppError } from "../../errors/AppError";
 import { LoginUser } from "../../interfaces/User.interface";
 
-async function userLoginService(dataLogin: LoginUser) {
+// <<<<<<< HEAD
+// async function userLoginService(dataLogin: LoginUser) {
   
-  const loggedUser = await UserRepository.repo().findOneBy({ email: dataLogin.email });
+//   const loggedUser = await UserRepository.repo().findOneBy({ email: dataLogin.email });
+// =======
+async function userLoginService(dataLogin: LoginUser, workspace_name: string) {
+  const loggedUser = await UserRepository.repo().findOneBy({
+    email: dataLogin.email,
+    role: { workspace: { name: workspace_name } },
+  });
 
   if (!loggedUser) {
     throw new AppError("Email or password is incorrect", 401);
