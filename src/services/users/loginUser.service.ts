@@ -4,9 +4,12 @@ import jwt from "jsonwebtoken";
 import { AppError } from "../../errors/AppError";
 import { Workspace } from '../../entities/Workspace';
 
-async function userLoginService(object: any, workspace_name:string ) {
 
-  const user = await UserRepository.repo().findOneBy({ email: object.email, role: { workspace: { name: workspace_name } } });
+async function userLoginService(object: any, workspace_name: string) {
+  const user = await UserRepository.repo().findOneBy({
+    email: object.email,
+    role: { workspace: { name: workspace_name } },
+  });
 
   if (!user) {
     throw new AppError("Email or password is incorrect", 401);
