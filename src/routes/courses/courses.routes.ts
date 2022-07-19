@@ -9,7 +9,7 @@ import verifyAdmin from '../../middlewares/authentication/verifyAdmin.middleware
 
 const courseRoute = Router();
 
-courseRoute.post('/:workspace_name/courses', createCourse);
+courseRoute.post('/:workspace_name/courses', VerifyToken, verifyAdmin, createCourse);
 courseRoute.get('/:workspace_name/courses', VerifyTokenId, showCourse);
 courseRoute.get('/:workspace_name/courses/:course_id', VerifyTokenId, showCourse);
 courseRoute.patch('/:workspace_name/courses/:course_id', VerifyTokenId, updateCourse)
