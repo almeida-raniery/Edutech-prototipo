@@ -1,26 +1,26 @@
 import request from "supertest";
 import { DataSource } from "typeorm";
-import app from "../../app";
-import AppDataSource from "../../data-source";
-import { Role } from "../../entities/Role";
-import { User } from "../../entities/User";
-import { Workspace } from "../../entities/Workspace";
-import UserRepository from "../../repositories/UserRepository";
+import app from "../app";
+import AppDataSource from "../data-source";
+import { Role } from "../entities/Role";
+import { User } from "../entities/User";
+import { Workspace } from "../entities/Workspace";
+import UserRepository from "../repositories/UserRepository";
 import {
   mockAdmin,
   mockAdminRole,
   mockStudentRole,
   mockTeacherRole,
   mockWorkspace,
-} from "../mocked_data/mocked-data";
+} from "./mocked_data/mocked-data";
 
 let connection: DataSource;
 let workspace: Workspace;
-let adminRole: Role;
-let adminUser: User;
-let teacherRole: Role;
-let studentRole: Role;
-let testUser: User;
+let adminRole: Role | null;
+let adminUser: User | null;
+let teacherRole: Role | null;
+let studentRole: Role | null;
+let testUser: User | null;
 
 beforeAll(async () => {
   await AppDataSource.initialize()
@@ -34,22 +34,68 @@ afterAll(async () => {
   await connection.destroy();
 });
 
-describe("Testando criação de usuário", () => {
+describe("Testando geração de workspace", () => {
+  test("Deve criar um workspace novo pela rota /workspaces", async () => {
+    const resp = await request(app)
+      .post("/workspaces")
+      .send({ name: "Greendale", roles: [], courses: [] });
+
+    expect(resp.status).toBe(201);
+    expect(resp.body.workspace.name).toBe("Greendale");
+    expect(resp.body.workspace.id).toBeDefined();
+
+    workspace = resp.body.workspace;
+  });
+});
+
+describe("Testando criação de roles e usuário padrão", () => {
+  test("Workspace deve ter ao menos um papel de usuário", async () => {
+    const roleRepository = AppDataSource.getRepository(Role);
+    const roles = await roleRepository.findBy({
+      workspace: { id: workspace.id },
+    });
+
+    expect(roles.length).toBeGreaterThan(0);
+  });
+
+  test("Workspace deve ter um usuário com papel de admin", async () => {
+    const roleRepository = AppDataSource.getRepository(Role);
+
+    adminRole = await roleRepository.findOneBy({
+      workspace: { id: workspace.id },
+      permissions: 7,
+    });
+
+    adminUser = await UserRepository.repo().findOneBy({
+      role: { id: adminRole?.id },
+    });
+
+    expect(adminRole).toBeInstanceOf(Role);
+    expect(adminRole?.users.length).toBeGreaterThan(0);
+    expect(adminUser?.role.id).toBe(adminRole?.id);
+    expect(adminUser?.role.permissions).toBe(7);
+  });
+});
+
+describe("Testando criação de usuário", async () => {
+  const roleRepository = AppDataSource.getRepository(Role);
+
+  studentRole = await roleRepository.findOneBy({
+    workspace: { id: workspace.id },
+    permissions: 3,
+  });
+
   test("Deve criar um usuário novo dentro de um workspace", async () => {
-    
     const newUser = {
       name: "Chang",
       email: "senorcheng@greendale.com",
       password: "chengnesia",
       role: teacherRole,
     };
-    
-    workspace = await mockWorkspace();
-    studentRole = await mockStudentRole(workspace);
-    adminRole = await mockAdminRole(workspace);
+
     adminUser = await mockAdmin(adminRole);
     teacherRole = await mockTeacherRole(workspace);
-    
+
     const loginResp = await request(app)
       .post("Greendale/login")
       .send({ email: adminUser.email, password: adminUser.password });
@@ -141,14 +187,13 @@ describe("Testando update de usuário", () => {
       .set("Authorization", `Bearer ${token}`)
       .send({ name: "Kevin", email: "Kevin@greendale.com", role: studentRole });
 
-    testUser = listResp.body.user
+    testUser = listResp.body.user;
 
     expect(listResp.status).toBe(200);
     expect(testUser).toBeDefined;
     expect(testUser.email).toBe("Kevin@greendale.com");
     expect(testUser.name).toBe("Kevin");
     expect(testUser.role.id).toBe(studentRole.id);
-
   });
 
   test("Deve fazer update em um usuário quando mesmo usuário", async () => {
@@ -161,7 +206,7 @@ describe("Testando update de usuário", () => {
     const listResp = await request(app)
       .patch(`Greendale/users/${testUser.id}`)
       .set("Authorization", `Bearer ${token}`)
-      .send({ name: "Chang", email: "Chang@greendale.com"});
+      .send({ name: "Chang", email: "Chang@greendale.com" });
 
     expect(listResp.status).toBe(200);
     expect(listResp.body).toBeDefined;
@@ -181,11 +226,13 @@ describe("Testando deleção de usuário", () => {
 
     const listResp = await request(app)
       .patch(`Greendale/users/${testUser.id}`)
-      .set("Authorization", `Bearer ${token}`)
+      .set("Authorization", `Bearer ${token}`);
 
     expect(listResp.status).toBe(200);
 
-    const findResp = await UserRepository.findOne({where: {id: testUser.id}});
+    const findResp = await UserRepository.findOne({
+      where: { id: testUser.id },
+    });
 
     expect(findResp).toBeFalsy();
   });

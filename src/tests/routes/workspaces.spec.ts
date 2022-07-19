@@ -2,11 +2,27 @@ import request from "supertest";
 import app from "../../app";
 import { Role } from "../../entities/Role";
 import AppDataSource from "../../data-source";
+import { IWorkspaceRequest } from "../../interfaces/Workspace.interface";
+import { DataSource } from "typeorm";
+
 describe("Testando geração de workspace", () => {
-  let workspaceData = { name: "Kenzie" };
+  let workspaceData: IWorkspaceRequest;
+  let connection: DataSource;
+
+  beforeAll(async () => {
+    await AppDataSource.initialize()
+      .then((res) => (connection = res))
+      .catch((err) => {
+        console.error("Erro ao inicializar o servidor", err);
+      });
+    workspaceData = { name: "Kenzie", roles: [], courses: [] };
+  });
+
+  afterAll(async () => {
+    await connection.destroy();
+  });
 
   test("Deve criar um workspace novo pela rota /workspaces", async () => {
-    workspaceData = { name: "Kenzie" };
     const resp = await request(app).post("/workspaces").send(workspaceData);
 
     expect(resp.status).toBe(201);
