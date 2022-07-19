@@ -2,6 +2,8 @@ import UserRepository from "../../repositories/UserRepository";
 import * as bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { AppError } from "../../errors/AppError";
+import { Workspace } from '../../entities/Workspace';
+
 
 async function userLoginService(object: any, workspace_name: string) {
   const user = await UserRepository.repo().findOneBy({

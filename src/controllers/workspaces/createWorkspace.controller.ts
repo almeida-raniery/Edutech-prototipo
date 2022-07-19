@@ -4,6 +4,7 @@ import createWorkspaceService from "../../services/workspaces/createWorkspace.se
 async function createWorkspace(req: Request, res: Response) {
   try {
     const { name} = req.body;
+    
     const created = await createWorkspaceService({ name });
    
     return res.status(200).json(created);
