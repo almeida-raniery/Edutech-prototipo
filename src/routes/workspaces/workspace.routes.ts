@@ -5,7 +5,7 @@ import showWorkspace from "../../controllers/workspaces/showWorkspace.controller
 
 const workspaceRoute = Router();
 
-workspaceRoute.post("/:workspace_name/workspaces", createWorkspace);
+workspaceRoute.post("/workspaces", createWorkspace);
 workspaceRoute.get("/:workspace_name/:name", showWorkspace);
 
 export default workspaceRoute;
