@@ -3,8 +3,11 @@ import * as bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { AppError } from "../../errors/AppError";
 
-async function userLoginService(object: any) {
-  const user = await UserRepository.repo().findOneBy({ email: object.email });
+async function userLoginService(object: any, workspace_name: string) {
+  const user = await UserRepository.repo().findOneBy({
+    email: object.email,
+    role: { workspace: { name: workspace_name } },
+  });
 
   if (!user) {
     throw new AppError("Email or password is incorrect", 401);
