@@ -10,7 +10,7 @@ async function createUser(req: Request, res: Response) {
     const { name, email, password } = req.body;
     const createdUser = await createUserService(name, email, password, workspace_name);
 
-    return res.json(instanceToPlain(createdUser)); //Não consegui retirar o campo password no retorno com class-transformer
+    return res.status(201).json(instanceToPlain(createdUser)); //Não consegui retirar o campo password no retorno com class-transformer
 
 }
 

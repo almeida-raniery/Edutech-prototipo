@@ -1,7 +1,7 @@
 import { hash } from "bcrypt";
 import UserRepository from "../../repositories/UserRepository";
 import { v4 as uuidv4 } from "uuid";
-import { IUser } from "../../interfaces/User.interface";
+import { IUser, UserToBeReturned} from "../../interfaces/User.interface";
 import { AppError } from "../../errors/AppError";
 
 async function createUserService(
@@ -9,7 +9,7 @@ async function createUserService(
   email: string,
   password: string, 
   workspace_name:string 
-): Promise<IUser>{
+): Promise<UserToBeReturned>{
  
   const findUser = await UserRepository.repo().findOneBy({email: email, role: { workspace: { name: workspace_name } }});
 
@@ -32,9 +32,15 @@ async function createUserService(
 
   await UserRepository.save(newUser);
 
-  const user = {... newUser};
+  const userToBeReturned: UserToBeReturned = {
+    id: newUser.id,
+    name: newUser.id,
+    email: newUser.email,
+    created_at: newUser.created_at,
+    last_login: newUser.last_login
+  }
 
-  return newUser;
+  return userToBeReturned;
 }
 
 export default createUserService;

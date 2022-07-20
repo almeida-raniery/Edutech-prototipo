@@ -19,3 +19,13 @@ export interface LoginUser {
   email: string;
   password: string;
 }
+
+export interface UserToBeReturned {
+  id: string,
+  name: string,
+  email: string,
+  classroom?: Classroom;
+  role?: Role;
+  created_at: Date;
+  last_login: Date;
+}
