@@ -2,7 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 function VerifyToken(req: Request, res: Response, next: NextFunction) {
+  
   const token = req.headers.authorization;
+
 
   if (!token) {
     return res.status(401).json({
@@ -18,16 +20,13 @@ function VerifyToken(req: Request, res: Response, next: NextFunction) {
         message: "Invalid token",
       });
     }
-
     
     req.user = {
       id: decoded.id,
       email: decoded.email,
       role: decoded.role
     };
-    
-    console.log(req.user)
-    
+
     next();
   });
 }

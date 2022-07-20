@@ -6,7 +6,7 @@ import {AppError} from "../../errors/AppError"
 
 async function createCourseService(title: string, workspaceName: string) {
 
-    const foundCourse = await CourseRepository.repo().findOneBy({ title: title });
+    const foundCourse = await CourseRepository.repo().findOneBy({ title: title, workspace:{ name: workspaceName }  });
 
     if (foundCourse) {
         throw new AppError('Course already exists', 400)

@@ -6,13 +6,15 @@ async function showCoursesService(workspace_name:string) {
 
     const SelectWorkspace = await WorkspaceRepository.repo().findOneBy({name: workspace_name });
 
-    if(!SelectWorkspace){
+    console.log(SelectWorkspace)
+
+ /*    if(!SelectWorkspace){
         throw new AppError("Workspace not found", 404);
     }
-  
-    const courses = SelectWorkspace.courses
-  
-    return courses;
+   */
+ 
+ /*    return SelectWorkspace.courses */
+
 
 }
 

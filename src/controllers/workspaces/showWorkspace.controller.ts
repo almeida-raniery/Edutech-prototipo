@@ -3,8 +3,8 @@ import showWorkspaceService from "../../services/workspaces/showWorkspace.servic
 
 async function showWorkspace(req: Request, res: Response) {
   try {
-    const {name} = req.params;
-    const workspaces = await showWorkspaceService({ name });
+    const {workspace_name} = req.params;
+    const workspaces = await showWorkspaceService({ name:workspace_name });
     
     return res.status(200).json(workspaces);
   } catch (err) {
