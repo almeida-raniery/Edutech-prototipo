@@ -3,10 +3,9 @@ import createClassroomService from "../../services/classrooms/createClassroom.se
 
 async function createClassroom(req: Request, res: Response) {
 
-    const { classroomTitle } = req.body.title;
+    const newClassroom = await createClassroomService(req.body.title, req.params.course_id);
 
-    const newClassroom = await createClassroomService(classroomTitle, req.params.course_id);
-
+    return res.status(201).json(newClassroom);
 
 }
 

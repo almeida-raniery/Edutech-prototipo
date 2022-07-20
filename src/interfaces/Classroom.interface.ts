@@ -6,7 +6,7 @@ export interface IClassroomRequest {
   title: string;
   users: IUser[];
   course: ICourse;
-  workspace: Workspace;
+  // workspace: Workspace;
 }
 
 export interface IClassroom extends IClassroomRequest {

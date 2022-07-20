@@ -1,7 +1,7 @@
 import { DeepPartial, FindManyOptions, FindOneOptions } from "typeorm";
 import AppDataSource from "../data-source";
 import { Classroom } from "../entities/ClassRoom";
-import { IClassroomRequest } from "../interfaces/Classroom.interface";
+import { IClassroom, IClassroomRequest } from "../interfaces/Classroom.interface";
 
 class ClassroomRepository {
   static repo() {
@@ -23,7 +23,7 @@ class ClassroomRepository {
     return await repository.findOne(options);
   }
 
-  static async save(data: IClassroomRequest) {
+  static async save(data: IClassroom) {
     const repository = AppDataSource.getRepository(Classroom);
     return await repository.save(data);
   }
