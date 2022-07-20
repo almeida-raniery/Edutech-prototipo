@@ -9,9 +9,9 @@ import verifyAdmin from '../../middlewares/authentication/verifyAdmin.middleware
 const classroomRoute = Router();
 
 classroomRoute.post('/:workspace_name/courses/:course_id/classes', createClassroom);
-classroomRoute.get('/:workspace_name/courses/:course_id/classes', showClassroom);
-classroomRoute.get('/:workspace_name/courses/:course_id/classes/:id', showClassroom);
-classroomRoute.patch('/:workspace_name/courses/:course_id/classes/:id', updateClassroom)
+classroomRoute.get('/:workspace_name/courses/:course_id/classes', VerifyToken, showClassroom);
+classroomRoute.get('/:workspace_name/courses/:course_id/classes/:id', VerifyToken, showClassroom);
+classroomRoute.patch('/:workspace_name/courses/:course_id/classes/:id', VerifyToken, updateClassroom)
 classroomRoute.delete('/:workspace_name/courses/:course_id/classes/:id', VerifyToken, verifyAdmin, deleteClassroom);
 
 export default classroomRoute;
