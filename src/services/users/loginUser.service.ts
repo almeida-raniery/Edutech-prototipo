@@ -5,8 +5,7 @@ import { AppError } from "../../errors/AppError";
 import { LoginUser } from "../../interfaces/User.interface";
 
 
-async function userLoginService(dataLogin: LoginUser, workspace_name: string) {
-
+async function userLoginService(dataLogin: any, workspace_name: string) {
   const loggedUser = await UserRepository.repo().findOneBy({
     email: dataLogin.email,
     role: { workspace: { name: workspace_name } },

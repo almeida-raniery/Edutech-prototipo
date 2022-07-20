@@ -7,10 +7,11 @@ import { AppError } from "../../errors/AppError";
 async function createUserService(
   name: string,
   email: string,
-  password: string
+  password: string, 
+  workspace_name:string 
 ): Promise<IUser>{
  
-  const findUser = await UserRepository.repo().findOneBy({email: email});
+  const findUser = await UserRepository.repo().findOneBy({email: email, role: { workspace: { name: workspace_name } }});
 
   if (findUser) {
     throw new AppError("Email already exists", 400);

@@ -19,11 +19,15 @@ function VerifyToken(req: Request, res: Response, next: NextFunction) {
       });
     }
 
+    
     req.user = {
       id: decoded.id,
       email: decoded.email,
+      role: decoded.role
     };
-
+    
+    console.log(req.user)
+    
     next();
   });
 }
