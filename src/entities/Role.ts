@@ -20,6 +20,7 @@ export class Role {
   users?: User[];
   @ManyToOne(() => Workspace, (workspace) => workspace.roles, {
     nullable: false,
+    eager: true
   })
   workspace: Workspace;
   @Column()
