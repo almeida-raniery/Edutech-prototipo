@@ -11,10 +11,10 @@ import classroomRoute from "./routes/classroom/classroom.routes";
 const app = express();
 app.use(express.json());
 
+app.use('/:workspace_name', userRoute);
+app.use('/:workspace_name/courses', courseRoute);
+app.use('/:workspace_name/courses/:course_id/classes', classroomRoute);
 app.use('', workspaceRoute);
-app.use('', userRoute);
-app.use('', courseRoute);
-app.use('', classroomRoute);
 
 app.use(handleAppErrorMiddleware);
 

@@ -4,17 +4,16 @@ import showCourses from '../../controllers/courses/showCourses.controller';
 import showCourseById from '../../controllers/courses/showCourseById.controller';
 import updateCourse from '../../controllers/courses/updateCourse.controller';
 import deleteCourse from '../../controllers/courses/deleteCourse.controller';
-import VerifyTokenId from "../../middlewares/authentication/VerifyTokenId.middleware";
 import VerifyToken from '../../middlewares/authentication/VerifyToken.middleware';
 import verifyAdmin from '../../middlewares/authentication/verifyAdmin.middleware';
 
 const courseRoute = Router();
 
-courseRoute.post('/:workspace_name/courses', VerifyToken, verifyAdmin, createCourse);
-courseRoute.get('/:workspace_name/courses', showCourses);
-courseRoute.get('/:workspace_name/courses/:course_id', VerifyToken, verifyAdmin, showCourseById);
-courseRoute.patch('/:workspace_name/courses/:course_id', VerifyTokenId, updateCourse);
-courseRoute.delete('/:workspace_name/courses/:course_id', VerifyToken, verifyAdmin, deleteCourse);
+courseRoute.post('', VerifyToken, verifyAdmin, createCourse);
+courseRoute.get('', VerifyToken, verifyAdmin, showCourses);
+courseRoute.get('/:course_id', VerifyToken, verifyAdmin, showCourseById);
+courseRoute.patch('/:course_id', VerifyToken, verifyAdmin, updateCourse);
+courseRoute.delete('/:course_id', VerifyToken, verifyAdmin, deleteCourse);
 
 
 export default courseRoute;
