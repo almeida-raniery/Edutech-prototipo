@@ -5,8 +5,8 @@ export interface IUserRequest {
   name: string;
   email: string;
   password: string;
-  classroom: Classroom;
-  role: Role;
+  classroom?: Classroom;
+  role?: Role;
 }
 
 export interface IUser extends IUserRequest{
@@ -14,3 +14,4 @@ export interface IUser extends IUserRequest{
   created_at: Date;
   last_login: Date;
 }
+
