@@ -2,17 +2,14 @@ import UserRepository from "../../repositories/UserRepository";
 import * as bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { AppError } from "../../errors/AppError";
-import { LoginUser } from "../../interfaces/User.interface";
+import { ILoginUser } from "../../interfaces/User.interface";
 
-
-async function userLoginService(dataLogin: any, workspace_name: string) {
+async function userLoginService(dataLogin: ILoginUser, workspace_name: string) {
   const loggedUser = await UserRepository.repo().findOneBy({
     email: dataLogin.email,
     role: { workspace: { name: workspace_name } },
   });
 
-  // const Workspace_Name = await WorkspaceRepository.repo().findOneBy({ name: workspace_name });
-  
   if (!loggedUser) {
     throw new AppError("Email or password is incorrect", 401);
   }
@@ -21,7 +18,10 @@ async function userLoginService(dataLogin: any, workspace_name: string) {
 
   await UserRepository.update(loggedUser.id, lastLogin);
 
-  const passwordCompare = bcrypt.compareSync(dataLogin.password, loggedUser.password);
+  const passwordCompare = bcrypt.compareSync(
+    dataLogin.password,
+    loggedUser.password
+  );
 
   if (!passwordCompare) {
     throw new AppError("Email or password is incorrect", 401);
@@ -30,16 +30,14 @@ async function userLoginService(dataLogin: any, workspace_name: string) {
   const token = jwt.sign(
     {
       id: loggedUser.id,
-      email: dataLogin.email,
-      //role terá que ser pego da requisição no banco, não virá no corpo
-      // role: dataLogin.role.id,
+      email: loggedUser.email,
+      role: loggedUser.role?.id,
     },
     "SECRET_KEY", //utilizar gerador de chave md5
     {
       expiresIn: "24h",
     }
   );
-
   return token;
 }
 
