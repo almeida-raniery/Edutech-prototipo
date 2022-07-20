@@ -15,3 +15,7 @@ export interface IUser extends IUserRequest{
   last_login: Date;
 }
 
+export interface LoginUser {
+  email: string;
+  password: string;
+}
