@@ -26,8 +26,6 @@ function VerifyToken(req: Request, res: Response, next: NextFunction) {
       role: decoded.role
     };
     
-    console.log(req.user)
-    
     next();
   });
 }

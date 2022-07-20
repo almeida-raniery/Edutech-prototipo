@@ -12,7 +12,7 @@ const classroomRoute = Router();
 classroomRoute.post('/:workspace_name/courses/:course_id/classes', createClassroom);
 classroomRoute.get('/:workspace_name/courses/:course_id/classes', VerifyTokenId, showClassroom);
 classroomRoute.get('/:workspace_name/courses/:course_id/classes/:id', VerifyTokenId, showClassroom);
-classroomRoute.patch('/:workspace_name/courses/:course_id/classes/:id', VerifyTokenId, updateClassroom)
+classroomRoute.patch('/:workspace_name/courses/:course_id/classes/:id', VerifyToken, updateClassroom)
 classroomRoute.delete('/:workspace_name/courses/:course_id/classes/:id', VerifyToken, verifyAdmin, deleteClassroom);
 
 export default classroomRoute;
