@@ -12,8 +12,11 @@ import { Role } from "../../entities/Role";
 import { User } from "../../entities/User";
 
 async function createWorkspaceService({ name }: IworkspaceCreate) {
-  const names = await WorkspaceRepository.repo().find();
-  const nameAlreadyExists = names.find((nome) => nome.name === name);
+
+  const nameNewWorkspace = name.toLowerCase()
+
+  const worskspacesNames = await WorkspaceRepository.repo().find();
+  const nameAlreadyExists = worskspacesNames.find((nome) => nome.name === nameNewWorkspace);
 
   const roleRepository = AppDataSource.getRepository(Role);
   const userRepository = AppDataSource.getRepository(User);
@@ -23,7 +26,7 @@ async function createWorkspaceService({ name }: IworkspaceCreate) {
   }
   const hashedPassword = await hash("password", 12);
   const workspace = new Workspace();
-  workspace.name = name;
+  workspace.name = nameNewWorkspace;
   workspace.created_at = new Date();
 
   await WorkspaceRepository.create(workspace);
