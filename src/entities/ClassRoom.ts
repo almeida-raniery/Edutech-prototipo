@@ -8,7 +8,7 @@ export class Classroom {
   readonly id: string;
   @Column({nullable: false})
   title: string;
-  @ManyToOne(()=>Course, course => course.classRooms, {nullable: false})
+  @ManyToOne(()=>Course, course => course.classRooms, {nullable: false, eager: true})
   course: Course;
   @OneToMany(()=>User, user => user.classroom, {nullable: true})
   users: User[];
