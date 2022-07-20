@@ -3,6 +3,8 @@ import createUserService from "../../services/users/createUser.service";
 import { instanceToPlain } from "class-transformer";
 
 async function createUser(req: Request, res: Response) {
+
+    console.log(req.body)
   
     const workspace_name = req.params.workspace_name
     const { name, email, password } = req.body;

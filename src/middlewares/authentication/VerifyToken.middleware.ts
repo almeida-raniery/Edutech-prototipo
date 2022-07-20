@@ -26,9 +26,7 @@ function VerifyToken(req: Request, res: Response, next: NextFunction) {
       email: decoded.email,
       role: decoded.role
     };
-    
-    console.log(req.user)
-    
+
     next();
   });
 }
