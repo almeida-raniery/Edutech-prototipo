@@ -71,10 +71,10 @@ Nessa aplicação o usuário sem fazer login ou se cadastrar pode criar um novo 
     "roleAdm": {
       "id": 21
     },
-    "roleS": {
+    "roleSTudent": {
       "id": 23
     },
-    "roleT": {
+    "roleTeacher": {
       "id": 22
     }
   }

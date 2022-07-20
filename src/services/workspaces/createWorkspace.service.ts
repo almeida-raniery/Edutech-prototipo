@@ -10,19 +10,25 @@ import WorkspaceRepository from "../../repositories/WorkspaceRepository";
 import { Course } from "../../entities/Course";
 import { Role } from "../../entities/Role";
 import { User } from "../../entities/User";
+import {AppError } from "../../errors/AppError";
 
 async function createWorkspaceService({ name }: IworkspaceCreate) {
-
-  const nameNewWorkspace = name.toLowerCase()
+  const nameNewWorkspace = name.toLowerCase();
 
   const worskspacesNames = await WorkspaceRepository.repo().find();
-  const nameAlreadyExists = worskspacesNames.find((nome) => nome.name === nameNewWorkspace);
+  const nameAlreadyExists = worskspacesNames.find(
+    (nome) => nome.name === nameNewWorkspace
+  );
 
   const roleRepository = AppDataSource.getRepository(Role);
   const userRepository = AppDataSource.getRepository(User);
 
   if (nameAlreadyExists) {
     throw new Error(`Name ${name} already exists`);
+  }
+
+  if (name.length == 0) {
+    throw new AppError(`Invalid parameters`,400);
   }
   const hashedPassword = await hash("password", 12);
   const workspace = new Workspace();
@@ -71,7 +77,15 @@ async function createWorkspaceService({ name }: IworkspaceCreate) {
   roleRepository.create(roleStudent);
   await roleRepository.save(roleStudent);
 
-  return { message: "Successfully created", user: newUser,roleAdm: roleAdmin.id, roleSudent: roleStudent.id, roleTeacher: roleTeacher.id };
+  return {
+    message: "Successfully created",
+    workspace_name: workspace.name,
+    workspace_id: workspace.id,
+    user: newUser,
+    roleAdm: roleAdmin.id,
+    roleSudent: roleStudent.id,
+    roleTeacher: roleTeacher.id,
+  };
 }
 
 export default createWorkspaceService;
