@@ -11,7 +11,7 @@ import verifyAdmin from '../../middlewares/authentication/verifyAdmin.middleware
 const courseRoute = Router();
 
 courseRoute.post('/:workspace_name/courses', VerifyToken, verifyAdmin, createCourse);
-courseRoute.get('/:workspace_name/courses', VerifyToken, verifyAdmin, showCourses);
+courseRoute.get('/:workspace_name/courses', showCourses);
 courseRoute.get('/:workspace_name/courses/:course_id', VerifyToken, verifyAdmin, showCourseById);
 courseRoute.patch('/:workspace_name/courses/:course_id', VerifyTokenId, updateCourse);
 courseRoute.delete('/:workspace_name/courses/:course_id', VerifyToken, verifyAdmin, deleteCourse);

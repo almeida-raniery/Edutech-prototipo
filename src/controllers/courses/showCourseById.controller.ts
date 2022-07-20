@@ -4,7 +4,7 @@ import showCourseByIdService from "../../services/courses/showCourseById.service
 async function showCourseById(req: Request, res: Response) {
 
     const course = await showCourseByIdService(req.params.course_id );
-    return res.status(204).json(course);
+    return res.status(200).json({course});
 
 }
 
