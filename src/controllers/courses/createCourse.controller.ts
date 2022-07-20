@@ -3,8 +3,8 @@ import { Request, Response } from "express";
 
 async function createCourse(req: Request, res: Response) {
     const { title } = req.body
-    const workspaceName = req.params.workspace_name
-    await createCourseService(title, workspaceName)
+    const workspace_name = req.baseUrl.split("/")
+    await createCourseService(title, workspace_name[1])
     return res.status(201).json({ message: "Course was created successfully" })
 }
 
