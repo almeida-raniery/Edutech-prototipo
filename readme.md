@@ -58,6 +58,8 @@ Nessa aplicação o usuário sem fazer login ou se cadastrar pode criar um novo 
 [
   {
     "message": "Successfully created",
+    "workspace_name": "workspace_name",
+    "workspace_id":"workspace_id",
     "user": {
       "id": "id_do_usuário",
       "name": "Admin",
@@ -160,7 +162,9 @@ Deve ser enviado um workspace que existe.
   {
 	"name": "user_name",
   "email": "user@example.com",
-  "password": "user_password"
+  "password": "user_password",
+  "role_id":"role_example",
+  "class_id":"class_example"
   }
 }
 ```
@@ -854,7 +858,8 @@ Todos os usuários podem listar uma classe, no caso dos alunos, podem listar cas
   {
     "title": "title_class",
     "class_id":"class_id",
-    "created_at":"created_date"
+    "created_at":"created_date",
+    "usersList":[]
   }
 }
 ```

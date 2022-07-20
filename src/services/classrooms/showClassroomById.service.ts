@@ -4,7 +4,7 @@ import ClassroomRepository from "../../repositories/ClassroomRepository";
 import CourseRepository from "../../repositories/CourseRepository";
 import WorkspaceRepository from "../../repositories/WorkspaceRepository";
 
-async function showClassroomService(workspace_name: string, course_id: string) {
+async function showClassroomServiceById(workspace_name: string, course_id: string , class_id: string) {
   const selectedWorkspace = await WorkspaceRepository.repo().findOneBy({
     name: workspace_name,
   });
@@ -16,7 +16,7 @@ async function showClassroomService(workspace_name: string, course_id: string) {
   //const selectedCourse = await CourseRepository.repo().findOneBy({id:selectedWorkspace.id});
 
   const selectedsClassrooms = await ClassroomRepository.repo().findBy({
-    id: course_id,
+    id: class_id,
   });
 
   if (!selectedsClassrooms) {
@@ -26,4 +26,4 @@ async function showClassroomService(workspace_name: string, course_id: string) {
   return selectedsClassrooms;
 }
 
-export default showClassroomService;
+export default showClassroomServiceById;
