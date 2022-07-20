@@ -6,7 +6,9 @@ async function updateClassroom(req: Request, res: Response) {
     const { course_id } = req.params
     const { id } = req.params
     const { role } = req.user
-    await updateClassroomService(workspace_name, course_id, id, role)
+    const { title } = req.body
+    await updateClassroomService(workspace_name, course_id, id, role, title)
+    return res.status(204).json({ message: "Classroom was updated successfully" })
 }
 
 export default updateClassroom;

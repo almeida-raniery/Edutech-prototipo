@@ -5,11 +5,15 @@ import { AppError } from "../../errors/AppError";
 import { ILoginUser } from "../../interfaces/User.interface";
 
 async function userLoginService(dataLogin: ILoginUser, workspace_name: string) {
-  const loggedUser = await UserRepository.repo().findOneBy({
-    email: dataLogin.email,
-    role: { workspace: { name: workspace_name } },
-  });
+  // const loggedUser = await UserRepository.repo().findOneBy({
+  //   email: dataLogin.email,
+  //   role: { workspace: { name: workspace_name } },
+  // });
 
+  const loggedUser = await UserRepository.repo().findOneBy({ email: dataLogin.email});
+
+  console.log(loggedUser)
+  
   if (!loggedUser) {
     throw new AppError("Email or password is incorrect", 401);
   }

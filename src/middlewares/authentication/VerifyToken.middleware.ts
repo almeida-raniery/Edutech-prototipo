@@ -5,7 +5,6 @@ function VerifyToken(req: Request, res: Response, next: NextFunction) {
   
   const token = req.headers.authorization;
 
-
   if (!token) {
     return res.status(401).json({
       message: "Invalid token",
@@ -20,7 +19,6 @@ function VerifyToken(req: Request, res: Response, next: NextFunction) {
         message: "Invalid token",
       });
     }
-    
     req.user = {
       id: decoded.id,
       email: decoded.email,
