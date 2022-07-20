@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import createWorkspaceService from "../../services/workspaces/createWorkspace.service";
 
-<<<<<<< HEAD
-function createWorkspace(req: Request, res: Response) {
-=======
 async function createWorkspace(req: Request, res: Response) {
   try {
     const { name} = req.body;
@@ -19,7 +16,6 @@ async function createWorkspace(req: Request, res: Response) {
       });
     }
   }
->>>>>>> c9269ae710d37522ee07532d3aebe0d72b047623
 }
 
 export default createWorkspace;
