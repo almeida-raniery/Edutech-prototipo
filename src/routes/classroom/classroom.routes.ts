@@ -3,7 +3,6 @@ import createClassroom from '../../controllers/classrooms/createClassroom.contro
 import showClassroom from '../../controllers/classrooms/showClassroom.controller';
 import updateClassroom from '../../controllers/classrooms/updateClassroom.controller';
 import deleteClassroom from '../../controllers/classrooms/deleteClassroom.controller';
-import VerifyTokenId from "../../middlewares/authentication/VerifyTokenId.middleware";
 import VerifyToken from '../../middlewares/authentication/VerifyToken.middleware';
 import verifyAdmin from '../../middlewares/authentication/verifyAdmin.middleware';
 

@@ -11,7 +11,7 @@ export class Course {
   title: string;
   @OneToMany(() => Classroom, ClassRoom => ClassRoom.course)
   classRooms: Classroom[];
-  @ManyToOne(() => Workspace, workspace => workspace.courses)
+  @ManyToOne(() => Workspace, workspace => workspace.courses, {eager: true} )
   workspace: Workspace;
   @Column()
   created_at: Date;
