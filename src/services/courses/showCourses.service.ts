@@ -8,8 +8,14 @@ async function showCoursesService(workspace_name:string) {
 
     console.log(SelectWorkspace)
 
-    if(!SelectWorkspace){
-        throw new AppError("Workspace not found", 404);
+    console.log(SelectWorkspace)
+
+    if(!workspace_name){
+        throw new AppError("Invalid parameters", 400);
+    }
+
+    if(SelectWorkspace.length === 0){
+        throw new AppError("Course not found", 404);
     }
 
     const courses = SelectWorkspace
