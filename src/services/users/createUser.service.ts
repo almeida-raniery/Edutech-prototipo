@@ -52,7 +52,7 @@ async function createUserService(
   
   const userToBeReturned: UserToBeReturned = {
     id: newUser.id,
-    name: newUser.id,
+    name: newUser.name,
     email: newUser.email,
     created_at: newUser.created_at,
     last_login: newUser.last_login
