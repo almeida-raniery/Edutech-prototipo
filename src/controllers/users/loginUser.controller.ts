@@ -5,8 +5,8 @@ async function loginUser(req: Request, res: Response) {
         
   const workspace_name = req.params.workspace_name;
 
-  const userLogged = await userLoginService(req.body, workspace_name);
-  return res.status(200).json({ userLogged });
+  const token = await userLoginService(req.body, workspace_name);
+  return res.status(200).json({ token });
 }
 
 export default loginUser;

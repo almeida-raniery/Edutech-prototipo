@@ -9,9 +9,7 @@ async function deleteUserService(id: string, workspace_name:string ) {
         throw new AppError("User not found", 404);
     }
   
-   const userDeleted = await UserRepository.delete(id);
-  
-    return userDeleted;
+   await UserRepository.delete(id);
 }
 
 export default deleteUserService;
