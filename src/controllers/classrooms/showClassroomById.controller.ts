@@ -3,13 +3,17 @@ import showClassroomService from "../../services/classrooms/showClassroom.servic
 import showClassroomServiceById from "../../services/classrooms/showClassroomById.service";
 
 async function showClassroomById(req: Request, res: Response) {
+  const workspace_name = req.baseUrl.split("/")[1];
+  const course_id = req.baseUrl.split("/")[3];
+  const classroom_id = req.params.id;
 
-    const workspace_name = req.params.workspace_name;
-    const course_id = req.params.id;
-    const classroom_id = req.params.classroom_id
-    const classes = await showClassroomServiceById(workspace_name,course_id, classroom_id);
-    
-    return res.status(200).json(classes);
+  const classes = await showClassroomServiceById(
+    workspace_name,
+    course_id,
+    classroom_id
+  );
+
+  return res.status(200).json(classes);
 }
 
 export default showClassroomById;
