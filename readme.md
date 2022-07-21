@@ -272,7 +272,7 @@ Caso você acabe errando e mandando algum campo errado, a resposta de erro será
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -307,7 +307,7 @@ Caso você acabe errando e mandando algum campo errado, a resposta de erro será
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -350,7 +350,7 @@ Caso você acabe errando e mandando algum campo errado, a resposta de erro será
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -415,7 +415,7 @@ Deve ser enviado no corpo da requisição o nome, senha.
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -461,7 +461,7 @@ Deve ser enviado no corpo da requisição o nome, senha.
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -530,7 +530,7 @@ Deve ser enviado no corpo da requisição o titulo do curso
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -575,7 +575,7 @@ Deve ser enviado no corpo da requisição o nome, senha.
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -624,7 +624,7 @@ Deve ser enviado na url o id de um curso válido
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -684,7 +684,7 @@ Deve ser enviado no corpo da requisição o título do curso
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -728,7 +728,7 @@ Deve ser enviado na url um id válido
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -796,7 +796,7 @@ Deve ser enviado no corpo da requisição um nome para a classe
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -806,7 +806,7 @@ Para fazer essa requisição é necessário ser admin
 
 ```json
 {
-  "Error": "Course already exists"
+  "Error": "Class already exists"
 }
 ```
 
@@ -841,7 +841,7 @@ Deve ser enviado na url um id válido
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -891,7 +891,7 @@ Deve ser enviado na url um id válido
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -952,7 +952,7 @@ Deve ser enviado no corpo da requisição um nome válido
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 
@@ -997,7 +997,7 @@ Deve ser enviado na url um id válido
 
 ```json
 {
-  "Error": "Unauthorized access"
+  "Error": "Invalid token"
 }
 ```
 

@@ -1,14 +1,23 @@
-import { Request, Response } from "express";
+import { request, Request, Response } from "express";
 import updateClassroomService from "../../services/classrooms/updateClassroom.service";
 
 async function updateClassroom(req: Request, res: Response) {
-    const { workspace_name } = req.params
-    const { course_id } = req.params
-    const { id } = req.params
-    const { role } = req.user
-    const { title } = req.body
-    await updateClassroomService(workspace_name, course_id, id, role, title)
-    return res.status(204).json({ message: "Classroom was updated successfully" })
+  const workspace_name = req.baseUrl.split("/")[1];
+  const course_id = req.baseUrl.split("/")[3];
+  const class_id = req.params.id;
+  const { role } = req.body;
+  const { title } = req.body;
+  
+
+  const update= await updateClassroomService(
+    workspace_name,
+    course_id,
+    class_id,
+    role,
+    title
+  ); 
+
+  return res.status(200).json(update);
 }
 
 export default updateClassroom;
