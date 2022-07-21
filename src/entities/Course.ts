@@ -6,12 +6,12 @@ import { Workspace } from "./Workspace";
 @Entity()
 export class Course {
   @PrimaryColumn('uuid')
-  readonly id: string;
+  id: string;
   @Column("varchar", {length: 128, nullable: false})
   title: string;
   @OneToMany(() => Classroom, ClassRoom => ClassRoom.course)
   classRooms: Classroom[];
-  @ManyToOne(() => Workspace, workspace => workspace.courses)
+  @ManyToOne(() => Workspace, workspace => workspace.courses, {eager: true} )
   workspace: Workspace;
   @Column()
   created_at: Date;
