@@ -45,6 +45,6 @@ describe("Testando geração de workspace", () => {
     });
 
     expect(adminRole).toBeInstanceOf(Role);
-    expect(adminRole?.users.length).toBeGreaterThan(0);
+    expect(adminRole?.users?.length).toBeGreaterThan(0);
   });
 });
