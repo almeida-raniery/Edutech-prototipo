@@ -537,6 +537,16 @@ Deve ser enviado no corpo da requisição o titulo do curso
 
 Para fazer essa requisição é necessário ser admin
 
+` FORMATO DA RESPOSTA - STATUS 404`
+
+```json
+{
+  "Error": "Course already exists"
+}
+```
+
+Não é possível criar dois cursos com o mesmo nome.
+
 <h2 align ='center'> Listando todos os cursos </h2>
 É necessário ser admin do workspace para listar todos os cursos.
 

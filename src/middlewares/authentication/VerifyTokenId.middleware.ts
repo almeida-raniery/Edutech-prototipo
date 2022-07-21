@@ -1,32 +1,27 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import AppDataSource from "../../data-source";
+import { Role } from "../../entities/Role";
+import { AppError } from "../../errors/AppError";
+import UserRepository from "../../repositories/UserRepository";
 
-function VerifyTokenId(req: Request, res: Response, next: NextFunction) {
+async function VerifyTokenId(req: Request, res: Response, next: NextFunction) {
+  
+  console.log(req)
+  const roleRepository = AppDataSource.getRepository(Role);
+  const userRole = await roleRepository.findOneBy({ id: req.user.role });
+  
+  console.log(userRole);
 
-    const token = req.headers.authorization;
-
-  if (!token) {
-    return res.status(401).json({
-      message: "Invalid token",
-    });
+  if (userRole?.permissions === 7) {
+    next();
   }
 
-  const tokenSplit = token.split(" ");
+  let user = await UserRepository.repo().findOneBy({ id: req.user.id });
+  if (!user) {
+    throw new AppError("User not authorizated");
+  }
 
-  jwt.verify(tokenSplit[1], "SECRET_KEY", (error: any, decoded: any) => {
-    if (error) {
-      return res.status(401).json({
-        message: "Invalid token",
-      });
-    }
-
-    if(req.params.id !== decoded.id){
-        return res.status(401).json({
-            message: "User Invalid token 3",
-          });
-    }
-    next();
-  });
+  next();
 }
 
 export default VerifyTokenId;

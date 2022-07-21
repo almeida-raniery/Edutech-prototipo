@@ -4,14 +4,18 @@ import { instanceToPlain } from "class-transformer";
 
 async function createUser(req: Request, res: Response) {
 
-    console.log(req.body)
-  
-    const workspace_name = req.params.workspace_name
-    const { name, email, password } = req.body;
-    const createdUser = await createUserService(name, email, password, workspace_name);
+  const workspace_name = req.baseUrl.split("/")
+  const { name, email, password, classroom_id, role_id } = req.body;
+  const createdUser = await createUserService(
+    name,
+    email,
+    password,
+    classroom_id,
+    role_id,
+    workspace_name[1]
+  );
 
-    return res.json(instanceToPlain(createdUser)); //Não consegui retirar o campo password no retorno com class-transformer
-
+  return res.status(201).json(instanceToPlain(createdUser)); 
 }
 
 export default createUser;

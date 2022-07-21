@@ -4,15 +4,19 @@ import { Course } from "../../entities/Course";
 import { v4 as uuidv4 } from "uuid";
 import {AppError} from "../../errors/AppError"
 
-async function createCourseService(title: string, workspaceName: string) {
+async function createCourseService(title: string, workspace_name: string) {
 
-    const foundCourse = await CourseRepository.repo().findOneBy({ title: title, workspace:{ name: workspaceName }  });
+    const foundCourse = await CourseRepository.repo().findOneBy({ title: title, workspace:{ name: workspace_name }  });
 
     if (foundCourse) {
-        throw new AppError('Course already exists', 400)
+        throw new AppError('Course already exists', 404)
     }
 
-    const foundWorkspace = await WorkspaceRepository.repo().findOneBy({ name: workspaceName })
+    if(!title){
+        throw new AppError("Invalid parameters", 400)
+    }
+
+    const foundWorkspace = await WorkspaceRepository.repo().findOneBy({ name: workspace_name })
 
     const course = new Course()
     course.id = uuidv4()
@@ -22,6 +26,8 @@ async function createCourseService(title: string, workspaceName: string) {
 
     await CourseRepository.repo().create(course)
     await CourseRepository.repo().save(course)
+
+    return course
 
 }
 
