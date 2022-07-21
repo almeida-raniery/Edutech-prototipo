@@ -10,11 +10,7 @@ async function deleteCourseService(id: string ) {
         throw new AppError("Course not found", 404);
     }
   
-   const courseDeleted = await CourseRepository.delete(id);
-  
-    return courseDeleted;
-
-
+   await CourseRepository.delete(id);
 
 }
 

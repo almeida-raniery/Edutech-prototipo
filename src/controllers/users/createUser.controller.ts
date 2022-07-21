@@ -4,7 +4,7 @@ import { instanceToPlain } from "class-transformer";
 
 async function createUser(req: Request, res: Response) {
 
-  const workspace_name = req.params.workspace_name;
+  const workspace_name = req.baseUrl.split("/")
   const { name, email, password, classroom_id, role_id } = req.body;
   const createdUser = await createUserService(
     name,
@@ -12,10 +12,10 @@ async function createUser(req: Request, res: Response) {
     password,
     classroom_id,
     role_id,
-    workspace_name
+    workspace_name[1]
   );
 
-  return res.json(instanceToPlain(createdUser)); 
+  return res.status(201).json(instanceToPlain(createdUser)); 
 }
 
 export default createUser;
