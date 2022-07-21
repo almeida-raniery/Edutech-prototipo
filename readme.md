@@ -13,6 +13,25 @@ Este projeto faz a criação de um banco de dados, com todas as tabelas necessá
 
 <blockquote align="center"></blockquote>
 
+<h3 align= "center">
+  Tecnologias&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</h3>
+
+<p align="center" >
+  As tecnologias utilizadas no projeto foram: Typescript | PostgreSQL | Express | Typeorm | Repository Pattern | Class Transformer | Error Global.
+</p>
+<br/>
+<br/>
+
+<h2 align="center">
+  <a href ="#endpoints">API</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</h2>
+
+<p align="left">
+  Link para a API: <a href="https://kenzieu-api.herokuapp.com/" target="_blank">https://kenzieu-api.herokuapp.com/</a>
+</p>
+
+
 <p align="center">
   <a href="#endpoints">Endpoints</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
