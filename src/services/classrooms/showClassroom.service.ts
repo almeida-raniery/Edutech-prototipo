@@ -13,16 +13,14 @@ async function showClassroomService(workspace_name: string, course_id: string) {
     throw new AppError("Workspace not found", 404);
   }
 
-  //const selectedCourse = await CourseRepository.repo().findOneBy({id:selectedWorkspace.id});
-
   const selectedsClassrooms = await ClassroomRepository.repo().findBy({
-    id: course_id,
+    course: { id: course_id },
   });
 
   if (!selectedsClassrooms) {
     throw new AppError("Classroom not found", 404);
   }
-
+  
   return selectedsClassrooms;
 }
 
