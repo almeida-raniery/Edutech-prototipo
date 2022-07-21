@@ -1,32 +1,24 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import AppDataSource from "../../data-source";
+import { Role } from "../../entities/Role";
+import { AppError } from "../../errors/AppError";
+import UserRepository from "../../repositories/UserRepository";
 
-function VerifyTokenId(req: Request, res: Response, next: NextFunction) {
+async function VerifyTokenId(req: Request, res: Response, next: NextFunction) {
+  const splitBaseUrl   = req.baseUrl.split("/") 
+  const roleRepository = AppDataSource.getRepository(Role);
+  const userRole = await roleRepository.findOneBy({
+    id: req.user.role,
+    workspace: { name: splitBaseUrl[1] },
+  });
+  const user = await UserRepository.repo().findOneBy({id: req.user.id})
+  const isSameUser = user?.classroom?.id === req.params.id
 
-    const token = req.headers.authorization;
-
-  if (!token) {
-    return res.status(401).json({
-      message: "Invalid token",
-    });
+  if (!userRole || !isSameUser || userRole.permissions < 7) {
+    throw new AppError("Unauthorized access", 401);
   }
 
-  const tokenSplit = token.split(" ");
-
-  jwt.verify(tokenSplit[1], "SECRET_KEY", (error: any, decoded: any) => {
-    if (error) {
-      return res.status(401).json({
-        message: "Invalid token",
-      });
-    }
-
-    if(req.params.id !== decoded.id){
-        return res.status(401).json({
-            message: "User Invalid token 3",
-          });
-    }
-    next();
-  });
+  next();
 }
 
 export default VerifyTokenId;
