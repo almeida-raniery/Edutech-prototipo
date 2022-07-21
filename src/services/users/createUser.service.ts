@@ -13,7 +13,7 @@ async function createUserService(
   classroom_id: string, 
   role_id: number,
   workspace_name: string
-): Promise<IUser> {
+) {
 
   const findUser = await UserRepository.repo().findOneBy({
     email: email,
@@ -50,7 +50,15 @@ async function createUserService(
   await UserRepository.create(newUser);
   await UserRepository.save(newUser);
   
-  return newUser;
+  const userToBeReturned: UserToBeReturned = {
+    id: newUser.id,
+    name: newUser.id,
+    email: newUser.email,
+    created_at: newUser.created_at,
+    last_login: newUser.last_login
+  };
+
+  return userToBeReturned ;
 }
 
 export default createUserService;

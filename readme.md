@@ -1,15 +1,14 @@
 <h1 align="center">
-  UKenzie
+  EDUtech
 </h1>
 
 <h1 align="center">
-  Ukenzie - API
+  Educational Technology Plataform
 </h1>
 
 <p align = "center">
-Este é o backend da aplicação UKenzie - Uma plataforma de educação EAD que conecta alunos e professores tornando possível criar uma trilha de aprendizado personalizada voltada para tecnologia.
-O professor pode ofertar cursos, deixar avaliações automatizadas e, quando necessário, realizar uma avaliação pessoal das atividades dos alunos.
-
+Projeto de backend para a plataforma EDUtech - uma plataforma de educação à distância que oferece a criaçao de espaços de trabalho para as instituições de ensino. Cada espaço de trabalho criado pode receber o cadastro de usuários, com nível de permissão de administrador, professor e alunos. Dentro de cada espaço, podem ser cadastrados diferentes cursos. E dentro de cada curso podem ser cadastradas diferentes turmas de ensino. Os usuários são vinculados às turmas, cursos e espaços de trabalho.  
+Este projeto faz a criação de um banco de dados, com todas as tabelas necessárias. E a criação de uma API para leitura, inclusão, atualização e deleção de dados no Banco. 
 </p>
 
 <blockquote align="center"></blockquote>

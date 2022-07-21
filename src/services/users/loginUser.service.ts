@@ -10,10 +10,13 @@ async function userLoginService(dataLogin: ILoginUser, workspace_name: string) {
   //   role: { workspace: { name: workspace_name } },
   // });
 
-  const loggedUser = await UserRepository.repo().findOneBy({ email: dataLogin.email});
+  const loggedUser = await UserRepository.repo().findOneBy({
+    email: dataLogin.email,
+    role: { workspace: { name: workspace_name } },
+  });
 
-  console.log(loggedUser)
-  
+  console.log(loggedUser);
+
   if (!loggedUser) {
     throw new AppError("Email or password is incorrect", 401);
   }

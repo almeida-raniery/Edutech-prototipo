@@ -5,6 +5,8 @@ function VerifyToken(req: Request, res: Response, next: NextFunction) {
   
   const token = req.headers.authorization;
 
+  console.log(token);
+
   if (!token) {
     return res.status(401).json({
       message: "Invalid token",

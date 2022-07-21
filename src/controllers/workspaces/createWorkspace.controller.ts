@@ -8,15 +8,7 @@ async function createWorkspace(req: Request, res: Response) {
     const created = await createWorkspaceService({ name });
     console.log(name);
    
-    return res.status(200).json(created);
-   /* catch (err) {
-    if (err instanceof Error) {
-      return res.status(404).json({
-        error: err.name,
-        message: err.message,
-      });
-    }
-  } */
+    return res.status(201).json(created);
 }
 
 export default createWorkspace;

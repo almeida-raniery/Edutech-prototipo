@@ -4,7 +4,6 @@ import { Role } from "../../entities/Role";
 import { AppError } from "../../errors/AppError";
 
 async function verifyAdmin(req: Request, res: Response, next: NextFunction) {
-<<<<<<< HEAD
   const splitBaseUrl   = req.baseUrl.split("/") 
   const roleRepository = AppDataSource.getRepository(Role);
   const userRole = await roleRepository.findOneBy({
@@ -12,12 +11,8 @@ async function verifyAdmin(req: Request, res: Response, next: NextFunction) {
     workspace: { name: splitBaseUrl[1] },
   });
 
-=======
-  
-  const roleRepository = AppDataSource.getRepository(Role)
-  const userRole = await roleRepository.findOneBy({id: req.user.role});
-  
->>>>>>> 6e9d636f1796ac47a1e37a2103a6bb4389479979
+  console.log(req.user.role)
+
   if (!userRole || userRole.permissions < 7) {
     throw new AppError("Unauthorized access", 401);
   }
