@@ -10,7 +10,15 @@ async function showUserService(id: string, workspace_name:string ) {
         throw new AppError("User not found", 404);
     }
 
-    return infoUser;
+    const userToBeReturned = {
+        id: infoUser.id,
+        name: infoUser.name,
+        email: infoUser.email,
+        created_at: infoUser.created_at,
+        last_login: infoUser.last_login
+    }
+
+    return userToBeReturned;
 }
 
 export default showUserService;

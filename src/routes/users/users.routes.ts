@@ -12,7 +12,11 @@ const userRoute = Router();
 
 userRoute.post('/users', VerifyToken, verifyAdmin, createUser);
 userRoute.post('/login', loginUser);
+<<<<<<< HEAD
 userRoute.get('/users/:id', VerifyToken, VerifyTokenId, showUser);
+=======
+userRoute.get('/users/:id', VerifyToken, showUser);
+>>>>>>> 6e9d636f1796ac47a1e37a2103a6bb4389479979
 userRoute.patch('/users/:id', VerifyToken, VerifyTokenId, updateUser)
 userRoute.delete('/users/:id', VerifyToken, verifyAdmin, deleteUser);
 
